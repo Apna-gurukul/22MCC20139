@@ -1,0 +1,54 @@
+pipeline{
+    agent any 
+    tools{
+        maven 'M1'
+    }
+    stages{
+        stage("script_01"){
+            steps{
+                git branch : 'master',url:'https://github.com/Apna-gurukul/maven_project.git'
+            }
+        }
+        stage("script_02"){
+           steps{
+               bat 'mvn clean'
+           }
+       }
+       
+       stage("script_03"){
+           steps{
+               bat 'mvn compile'
+           }
+        }
+        
+        stage("script_04"){
+           steps{
+               bat 'mvn test'
+           }
+       }
+       
+       stage("script_05"){
+           steps{
+               bat 'mvn package'
+           }
+       }
+       
+       stage("script_06"){
+           steps{
+               bat 'mvn integration-test'
+           }
+       }
+       
+       stage("script_07"){
+           steps{
+               bat 'mvn verify'
+           }
+       }
+
+      stage("script_08"){
+           steps{
+               bat 'java -classpath target\app1-1.0-App1.jar;.; com.apnagurukul.App'
+           }
+       }
+    }   
+}
